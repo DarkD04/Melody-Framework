@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctxviys3i4ssi"]
+
+[ext_resource type="Script" path="res://Scripts/Game Scripts/Application.gd" id="1_2o6rv"]
+[ext_resource type="PackedScene" uid="uid://q87kgg3afqnn" path="res://Scenes/Stages/Test Stage Act 1.tscn" id="2_p1mtl"]
+
+[node name="Application" type="Node2D"]
+script = ExtResource("1_2o6rv")
+starting_scene = ExtResource("2_p1mtl")
