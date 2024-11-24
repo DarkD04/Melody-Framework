@@ -7,8 +7,8 @@ var target_pos : Vector2
 
 var camera_lag : int = 0
 var ground_offset : float = 0
+var roll_offset = 0
 var cam_speed : Vector2 = Vector2.ZERO 
-var stop : bool = false
 
 @export_group("Camera Margins")
 @export var air_margins : int = 32
@@ -26,11 +26,19 @@ func _ready():
 	#Set the scrolling speeds
 	cam_speed = Vector2(16, 24)
 
-
 func _physics_process(delta):
+	#Update camera rolling offset
+	if(target.sprite.animation == "Roll"):
+		roll_offset = target.player_hitbox_size[0][1] - target.player_rolling_hitbox_size[0][1]
+	else:
+		roll_offset = 0
+		
 	#Execute movement functions
 	camera_horizontal_movement()
 	camera_vertical_movement()
+	
+	#Subtract the camera lag
+	camera_lag = max(camera_lag - 1, 0)
 	
 	#Position the camera to the target
 	position.x = target_pos.x
@@ -63,9 +71,9 @@ func camera_vertical_movement():
 		ground_offset -= ground_offset / 8.0
 		
 		#Move camera to the right
-		if(target.position.y > target_pos.y + ground_offset):
-			target_pos.y = min(target_pos.y + cam_speed.y, target.position.y - ground_offset)
+		if(target.position.y > target_pos.y + ground_offset + roll_offset):
+			target_pos.y = min(target_pos.y + cam_speed.y, target.position.y - ground_offset - roll_offset)
 		
 		#Move camera to the left
-		if(target.position.y < target_pos.y - ground_offset):
-			target_pos.y = max(target_pos.y - cam_speed.y, target.position.y + ground_offset)
+		if(target.position.y < target_pos.y - ground_offset + roll_offset):
+			target_pos.y = max(target_pos.y - cam_speed.y, target.position.y + ground_offset - roll_offset)

@@ -1,6 +1,10 @@
 extends Node2D
 class_name Collision
 
+enum col_plane
+{
+	A, B
+}
 
 #Ground collision modes
 enum mode
@@ -33,6 +37,8 @@ var ground_mode = mode.CMODE_GROUND
 
 var mode_change_delay = 0
 var delay_sub = 0
+
+var plane = col_plane.A
 
 func _init():
 	for i in sensor_type.size():
@@ -158,3 +164,7 @@ func collision_set_mode():
 			ground_mode = mode.CMODE_LWALL
 			
 	ray_process()
+
+func UpdateLoopSolidCol(flag : bool, leftright : int):
+	for i in range(0, sensor.size()):
+		sensor[i].set_collision_mask_value(2 + leftright, flag)

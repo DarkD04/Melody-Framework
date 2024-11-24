@@ -1,0 +1,174 @@
+[gd_scene load_steps=15 format=3 uid="uid://q87kgg3afqnn"]
+
+[ext_resource type="PackedScene" uid="uid://0jyogwcs720w" path="res://Objects/Player/Player.tscn" id="1_3qn7w"]
+[ext_resource type="Script" path="res://Scripts/Stage Scripts/Stage.gd" id="1_5bp2j"]
+[ext_resource type="AudioStream" uid="uid://bjjl1vkhssvbu" path="res://Music/r-dash.ogg" id="2_t3csd"]
+[ext_resource type="Script" path="res://Scripts/Stage Scripts/Stage Camera.gd" id="2_wwubt"]
+[ext_resource type="Texture2D" uid="uid://dwb6670fd2phk" path="res://Scenes/Stages/Checkerdrome Zone/Background/teststage_bg_layer1.png" id="3_a0nh0"]
+[ext_resource type="PackedScene" uid="uid://qum03x1561ck" path="res://Objects/Player/PlayerDebug.tscn" id="3_n7y2s"]
+[ext_resource type="Texture2D" uid="uid://cbuwdl6egd0w3" path="res://Scenes/Stages/Checkerdrome Zone/Background/teststage_bg_layer2.png" id="4_1wint"]
+[ext_resource type="PackedScene" uid="uid://dw2n5rxeidxr5" path="res://Objects/Plane Swapper/Plane Swapper.tscn" id="4_jb1dk"]
+[ext_resource type="Texture2D" uid="uid://cvl7o501o4kv1" path="res://Scenes/Stages/Checkerdrome Zone/Background/teststage_bg_layer3.png" id="5_xfdc7"]
+[ext_resource type="Texture2D" uid="uid://b15clbg3yga41" path="res://Scenes/Stages/Checkerdrome Zone/Background/teststage_bg_layer4.png" id="6_568c8"]
+[ext_resource type="Texture2D" uid="uid://dbiyln0o4gis2" path="res://Scenes/Stages/Checkerdrome Zone/Background/teststage_bg_layer5.png" id="7_t2fcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhtbu"]
+size = Vector2(55.5, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eyd2y"]
+radius = 69.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4urj2"]
+size = Vector2(32, 32)
+
+[node name="Stage" type="Node2D"]
+script = ExtResource("1_5bp2j")
+stage_music = ExtResource("2_t3csd")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Layer 1" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.1)
+repeat_size = Vector2(256, 128)
+autoscroll = Vector2(0, -6)
+repeat_times = 4
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background/Layer 1"]
+texture_filter = 1
+position = Vector2(640, 320)
+texture = ExtResource("3_a0nh0")
+
+[node name="Layer 2" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(256, 128)
+autoscroll = Vector2(0, -12)
+repeat_times = 4
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background/Layer 2"]
+texture_filter = 1
+position = Vector2(640, 320)
+texture = ExtResource("4_1wint")
+
+[node name="Layer 3" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.3)
+repeat_size = Vector2(256, 128)
+autoscroll = Vector2(0, -18)
+repeat_times = 4
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background/Layer 3"]
+texture_filter = 1
+position = Vector2(640, 320)
+texture = ExtResource("5_xfdc7")
+
+[node name="Layer 4" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.02)
+repeat_size = Vector2(256, 128)
+repeat_times = 4
+
+[node name="TeststageBgLayer4" type="Sprite2D" parent="Background/Layer 4"]
+position = Vector2(641, 320)
+texture = ExtResource("6_568c8")
+
+[node name="Layer 5" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.07)
+repeat_size = Vector2(256, 128)
+repeat_times = 4
+
+[node name="TeststageBgLayer5" type="Sprite2D" parent="Background/Layer 5"]
+position = Vector2(640, 320)
+texture = ExtResource("7_t2fcd")
+
+[node name="Player" parent="." instance=ExtResource("1_3qn7w")]
+position = Vector2(323, 115)
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("2_wwubt")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(2513, 51)
+rotation = 3.14159
+scale = Vector2(1, -1)
+collision_layer = 4
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D3"]
+position = Vector2(-0.600101, 453.244)
+scale = Vector2(1, -0.84)
+polygon = PackedVector2Array(1227, 339, 1262, 334, 1290, 324, 1308, 309, 1317, 294, 1322, 272, 1324, 240, 1324, 222, 1339, 222, 1339, 339)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PackedVector2Array(1227, 339, 1262, 334, 1290, 324, 1308, 309, 1317, 294, 1322, 272, 1324, 240, 1324, 222, 1339, 222, 1339, 339)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(12, 51)
+collision_layer = 2
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D4"]
+position = Vector2(0.600098, 453.244)
+scale = Vector2(1, -0.84)
+polygon = PackedVector2Array(1227, 339, 1262, 334, 1290, 324, 1308, 309, 1317, 294, 1322, 272, 1324, 240, 1324, 222, 1339, 222, 1339, 339)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D4"]
+polygon = PackedVector2Array(1227, 339, 1262, 334, 1290, 324, 1308, 309, 1317, 294, 1322, 272, 1324, 240, 1324, 222, 1339, 222, 1339, 339)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(12, 51)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 0, 84, 0, 84, 60, 86, 82, 93, 100, 102, 112, 113, 120, 127, 128, 145, 134, 267.262, 134, 345, 134, 431, 154, 449.368, 154, 473, 152, 494, 146, 506, 139, 516, 129, 524, 115, 528, 98.22, 528, 79.9649, 528, 61, 666, 61, 666, 343, 597, 412, 67, 412, 0, 342, 0, 189, 0, 115, 0, 58)
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(27.75, -8)
+shape = SubResource("RectangleShape2D_hhtbu")
+one_way_collision_margin = 128.0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(69, 343)
+shape = SubResource("CircleShape2D_eyd2y")
+one_way_collision_margin = 128.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(597, 343)
+shape = SubResource("CircleShape2D_eyd2y")
+one_way_collision_margin = 128.0
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(969, 47)
+shape = SubResource("CircleShape2D_eyd2y")
+one_way_collision_margin = 128.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(597, 61)
+shape = SubResource("CircleShape2D_eyd2y")
+one_way_collision_margin = 128.0
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(152, -71)
+shape = SubResource("RectangleShape2D_4urj2")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1, 20)
+polygon = PackedVector2Array(270, 6, 271, -9, 275, -29, 280, -42, 294, -57, 314, -72, 345, -78, 408, -78, 408, -136, 238, -184, 238, 6)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(709, 202, 807, 202, 822, 203, 839, 209, 854, 219, 915, 280, 928, 291, 948, 300, 973, 306, 1028, 306, 1057, 309, 1082, 315, 1107, 327, 1134, 334, 1170, 339, 1364, 339, 1395, 336, 1419, 331, 1431, 323, 1439, 315, 1444, 306, 1449, 290, 1451, 267, 1451, 247, 1533, 247, 1533, 426, 709, 426)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(67, 59)
+polygon = PackedVector2Array(1648, 307, 1689, 295, 1723, 278, 1757, 250, 1784, 220, 1792, 183, 1800, 119, 1807, 90, 1816, 71, 1825, 57, 1844, 41, 1873, 36, 1897, 39, 1913, 46, 1927, 69, 1929, 106, 1928, 177, 1932, 235, 1936, 255, 1945, 267, 1955, 273, 1969, 275, 1988, 270, 1995, 253, 2000, 214, 2000, 165, 2000, 133, 2003, 83, 2016, 55, 2030, 37, 2047, 27, 2068, 25, 2084, 30, 2095, 36, 2102, 44, 2107, 60, 2116, 114, 2108, 142, 2094, 170, 2088, 203, 2097, 253, 2112, 314, 2133, 344, 2189, 361, 2249, 351, 2331, 302, 2359, 272, 2379, 241, 2404, 177, 2431, 113, 2452, 83, 2480, 63, 2544, 39, 2625, 28, 2702, 35, 2761, 63, 2792, 88, 2821, 142, 2834, 229, 2830, 283, 2807, 329, 2782, 348, 2747, 354, 2718, 337, 2701, 305, 2697, 259, 2709, 225, 2707, 183, 2688, 156, 2661, 139, 2633, 153, 2618, 174, 2595, 213, 2582, 290, 2601, 345, 2635, 381, 2655, 400, 2694, 417, 2741, 420, 2759, 426, 2780, 442, 2793, 464, 2802, 503, 2787, 561, 2768, 599, 2747, 629, 2719, 660, 2671, 684, 2607, 702, 2542, 698, 2506, 676, 2454, 603, 2424, 522, 2397, 467, 2359, 439, 2318, 436, 2281, 445, 2249, 473, 2233, 511, 2221, 521, 2206, 521, 2189, 514, 2168, 500, 2147, 464, 2135, 444, 2115, 433, 2084, 421, 2059, 419, 2038, 427, 2025, 454, 2020, 512, 2037, 562, 2069, 595, 2103, 613, 2147, 638, 2175, 672, 2189, 709, 2181, 746, 2148, 801, 2116, 823, 2055, 833, 2022, 835, 1997, 823, 1980, 797, 1970, 771, 1962, 749, 1936, 728, 1898, 717, 1845, 707, 1814, 717, 1791, 736, 1760, 747, 1684, 737, 1635, 711, 1596, 681, 1579, 653, 1563, 624, 1552, 564, 1548, 513, 1560, 449, 1576, 395, 1590, 355, 1606, 329, 1624, 316)
+
+[node name="PlayerDebug" parent="." instance=ExtResource("3_n7y2s")]
+
+[node name="Plane Swapper" parent="." instance=ExtResource("4_jb1dk")]
+position = Vector2(1151, 281)
+scale = Vector2(1, 13.32)
+
+[node name="Plane Swapper2" parent="." instance=ExtResource("4_jb1dk")]
+position = Vector2(1376, 282)
+scale = Vector2(1, 13.32)
+layer = 1
+
+[node name="Plane Swapper3" parent="." instance=ExtResource("4_jb1dk")]
+position = Vector2(1262, 235)
+scale = Vector2(1, 2)
+layer = 2

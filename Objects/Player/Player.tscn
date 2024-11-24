@@ -1,10 +1,64 @@
-[gd_scene load_steps=3 format=3 uid="uid://0jyogwcs720w"]
+[gd_scene load_steps=14 format=3 uid="uid://0jyogwcs720w"]
 
 [ext_resource type="Script" path="res://Objects/Player/Scripts/Player.gd" id="1_hrvk5"]
 [ext_resource type="PackedScene" uid="uid://blirnycd506cj" path="res://Objects/Player/Assets/Sonic Sprite.aseprite" id="2_4ocla"]
+[ext_resource type="Shader" path="res://Shaders/cleanEdge.gdshader" id="3_m6swp"]
+[ext_resource type="Script" path="res://Scripts/Stage Scripts/StateMachine.gd" id="3_q0t88"]
+[ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Normal.gd" id="4_1plxq"]
+[ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Jump.gd" id="5_ssam3"]
+[ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Roll.gd" id="6_6toot"]
+[ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Look Up.gd" id="7_dherc"]
+[ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Look Down.gd" id="8_tigdw"]
+[ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Spindash.gd" id="9_y6s5t"]
+[ext_resource type="Script" path="res://Objects/Player/State Skidding.gd" id="11_gm7vu"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pub50"]
+shader = ExtResource("3_m6swp")
+shader_parameter/highestColor = Vector3(1, 1, 1)
+shader_parameter/similarThreshold = 0.0
+shader_parameter/lineWidth = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0o04"]
+size = Vector2(20, 38)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_hrvk5")
 
 [node name="PlayerSprite" parent="." instance=ExtResource("2_4ocla")]
 texture_filter = 1
+texture_repeat = 1
+material = SubResource("ShaderMaterial_pub50")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_o0o04")
+debug_color = Color(0.660347, 0.51449, 7.70092e-07, 0.42)
+
+[node name="StatesMachine" type="Node" parent="."]
+script = ExtResource("3_q0t88")
+initial_state = NodePath("Normal")
+
+[node name="Normal" type="Node" parent="StatesMachine"]
+script = ExtResource("4_1plxq")
+
+[node name="Jump" type="Node" parent="StatesMachine"]
+script = ExtResource("5_ssam3")
+
+[node name="Roll" type="Node" parent="StatesMachine"]
+script = ExtResource("6_6toot")
+
+[node name="Look Up" type="Node" parent="StatesMachine"]
+script = ExtResource("7_dherc")
+
+[node name="Look Down" type="Node" parent="StatesMachine"]
+script = ExtResource("8_tigdw")
+
+[node name="Spindash" type="Node" parent="StatesMachine"]
+script = ExtResource("9_y6s5t")
+
+[node name="Skidding" type="Node" parent="StatesMachine"]
+script = ExtResource("11_gm7vu")
+
+[connection signal="animation_finished" from="PlayerSprite" to="StatesMachine/Skidding" method="animation_finished"]

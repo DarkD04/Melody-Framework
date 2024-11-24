@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw2n5rxeidxr5"]
+
+[ext_resource type="Script" path="res://Objects/Plane Swapper/Plane Swapper.gd" id="1_aghlr"]
+[ext_resource type="Texture2D" uid="uid://bpssgisaqs2tg" path="res://Objects/Plane Swapper/plane_swapper.png" id="2_amppv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxl1h"]
+size = Vector2(16, 16)
+
+[node name="Plane Swapper" type="Area2D"]
+collision_layer = 129
+collision_mask = 129
+script = ExtResource("1_aghlr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fxl1h")
+
+[node name="PlaneSwapper" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_amppv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
