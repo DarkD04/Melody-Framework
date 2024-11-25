@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://0jyogwcs720w"]
+[gd_scene load_steps=12 format=3 uid="uid://0jyogwcs720w"]
 
 [ext_resource type="Script" path="res://Objects/Player/Scripts/Player.gd" id="1_hrvk5"]
-[ext_resource type="PackedScene" uid="uid://blirnycd506cj" path="res://Objects/Player/Assets/Sonic Sprite.aseprite" id="2_4ocla"]
-[ext_resource type="Shader" path="res://Shaders/cleanEdge.gdshader" id="3_m6swp"]
+[ext_resource type="PackedScene" uid="uid://blirnycd506cj" path="res://Objects/Player/Assets/Sonic Sprite.aseprite" id="2_u8q8l"]
 [ext_resource type="Script" path="res://Scripts/Stage Scripts/StateMachine.gd" id="3_q0t88"]
 [ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Normal.gd" id="4_1plxq"]
 [ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Jump.gd" id="5_ssam3"]
@@ -12,12 +11,6 @@
 [ext_resource type="Script" path="res://Objects/Player/Scripts/State Scripts/State Spindash.gd" id="9_y6s5t"]
 [ext_resource type="Script" path="res://Objects/Player/State Skidding.gd" id="11_gm7vu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pub50"]
-shader = ExtResource("3_m6swp")
-shader_parameter/highestColor = Vector3(1, 1, 1)
-shader_parameter/similarThreshold = 0.0
-shader_parameter/lineWidth = 1.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0o04"]
 size = Vector2(20, 38)
 
@@ -26,13 +19,11 @@ collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_hrvk5")
 
-[node name="PlayerSprite" parent="." instance=ExtResource("2_4ocla")]
+[node name="PlayerSprite" parent="." instance=ExtResource("2_u8q8l")]
 texture_filter = 1
-texture_repeat = 1
-material = SubResource("ShaderMaterial_pub50")
+animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_o0o04")
 debug_color = Color(0.660347, 0.51449, 7.70092e-07, 0.42)
 
